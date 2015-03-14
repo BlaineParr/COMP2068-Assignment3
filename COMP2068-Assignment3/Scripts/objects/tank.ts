@@ -1,32 +1,40 @@
 ﻿module objects {
-    export class Tank extends createjs.Bitmap{
+    export class Tank extends objects.GameObject{
 
         //instance variables
-        private _movingUp;
-        private _movingDown;
+        private _movingUp: boolean;
+        private _movingDown: boolean;
+        private health: number;
 
         //Constructor/////////////////////////////////////////////////////////////////////////////
         constructor() {
-            super(assetLoader.getResult("tank"));
+            super("tank");
 
-            this.regX = this.getBounds().width * 0.5;
-            this.regY = this.getBounds().height * 0.5;
+            this.health = 3;
 
             this.x = 48;
             this.y = 240;
         } //constructor ends
 
         //Public Methods//////////////////////////////////////////////////////////////////////////
-        update() {
+        public update(): void {
             if (this._movingUp) {
                 this.y -= 3;
+
+                if (this.y < -16) {
+                    this.y = 496;
+                } //if ends
             } //if ends
             else if (this._movingDown) {
                 this.y += 3;
+
+                if (this.y > 496) {
+                    this.y = -16;
+                } //if ends
             } //else if ends
         } //method update ends
 
-        startMoving(key) {
+        public startMoving(key): void {
             if (key == 87) {
                 this._movingUp = true;
             } //if ends
@@ -35,7 +43,7 @@
             } //if ends
         } //method startMoving ends
 
-        stopMoving(key) {
+        public stopMoving(key): void {
             if (key == 87) {
                 this._movingUp = false;
             } //if ends
@@ -43,5 +51,9 @@
                 this._movingDown = false;
             } //if ends
         } //method startMoving ends
+
+        public collide(): void {
+            this.health--;
+        } //method collide ends
     } //class Tank ends
 } //module objects ends 

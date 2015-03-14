@@ -3,6 +3,7 @@
 /// <reference path="typings/tweenjs/tweenjs.d.ts" />
 /// <reference path="typings/soundjs/soundjs.d.ts" />
 /// <reference path="typings/preloadjs/preloadjs.d.ts" />
+/// <reference path="objects/gameobject.ts" />
 /// <reference path="objects/alien.ts" />
 /// <reference path="objects/island.ts" />
 /// <reference path="objects/ocean.ts" />
@@ -63,10 +64,10 @@ function main() {
     }
     //set up the game for keyboard input
     document.addEventListener("keydown", function (event) {
-        tank.startMoving(event.keyCode);
+        tank.startMoving(event.keyCode); //start moving the tank
     });
     document.addEventListener("keyup", function (event) {
-        tank.stopMoving(event.keyCode);
+        tank.stopMoving(event.keyCode); //stop moving the tank
     });
 } //function main ends
 //# sourceMappingURL=game.js.map
