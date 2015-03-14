@@ -8,6 +8,7 @@
 /// <reference path="objects/island.ts" />
 /// <reference path="objects/ocean.ts" />
 /// <reference path="objects/tank.ts" />
+/// <reference path="objects/bullet.ts" />
 var canvas;
 var stage;
 var assetLoader;
@@ -21,7 +22,9 @@ var manifest = [
     { id: "alien", src: "assets/images/Alien.png" },
     { id: "island", src: "assets/images/island.png" },
     { id: "ocean", src: "assets/images/ocean.gif" },
-    { id: "tank", src: "assets/images/Tank.png" }
+    { id: "tank", src: "assets/images/Tank.png" },
+    { id: "bullet", src: "assets/images/Bullet.png" },
+    { id: "song", src: "assets/audio/Conquest.ogg" }
 ];
 function preload() {
     assetLoader = new createjs.LoadQueue(); // instantiated assetLoader
@@ -39,18 +42,16 @@ function init() {
 } //function init ends
 function gameLoop() {
     stage.update(); // Refreshes our stage
-    if (tank != null) {
-        tank.update(); //updates tank's position
-    }
+    tank.update(); //updates tank's position
     island.update(); //updates island's position
     ocean.update(); //updates ocean's position
+    if (tank.bulletOnScreen) {
+        tank.bullet.update();
+    } //if ends
     for (var alien = 3; alien > 0; alien--) {
         aliens[alien].update(); //updates aliens' position
         checkCollision(tank, aliens[alien]);
     }
-    if (tank.health <= 0) {
-        tank.visible = false;
-    } //if ends
 } //function gameLoop ends
 // Our Game Kicks off in here
 function main() {
@@ -69,11 +70,13 @@ function main() {
     }
     //set up the game for keyboard input
     document.addEventListener("keydown", function (event) {
-        tank.startMoving(event.keyCode); //start moving the tank
+        tank.actionStart(event.keyCode); //start moving the tank
     });
     document.addEventListener("keyup", function (event) {
-        tank.stopMoving(event.keyCode); //start moving the tank
+        tank.actionEnd(event.keyCode); //start moving the tank
     });
+    //play song
+    createjs.Sound.play("song", { loop: -1 });
 } //function main ends
 //calculate the distance between two points
 function distance(p1, p2) {
