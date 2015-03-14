@@ -62,7 +62,6 @@
                 this.bullet = new objects.Bullet(this.x, this.y);
                 stage.addChild(this.bullet);
                 this.bulletOnScreen = true;
-                console.log("Bullet on Screen!");
             } //if ends
         } //method fire ends
 

@@ -70,6 +70,7 @@
   <ItemGroup>
     <Content Include="assets\images\Alien.png" />
     <Content Include="assets\images\Bullet.png" />
+    <Content Include="assets\images\Explosion.png" />
     <Content Include="assets\images\island.png" />
     <Content Include="assets\images\ocean.gif" />
     <Content Include="assets\images\Tank.png" />
@@ -89,6 +90,7 @@
     <TypeScriptCompile Include="Scripts\game.ts" />
     <TypeScriptCompile Include="Scripts\objects\alien.ts" />
     <TypeScriptCompile Include="Scripts\objects\bullet.ts" />
+    <TypeScriptCompile Include="Scripts\objects\explosion.ts" />
     <TypeScriptCompile Include="Scripts\objects\gameObject.ts" />
     <TypeScriptCompile Include="Scripts\objects\island.ts" />
     <TypeScriptCompile Include="Scripts\objects\ocean.ts" />

@@ -34,5 +34,24 @@
 
             this._checkBounds();
         } //method update ends
-    } //class Plane ends
+
+        public collide(): void {
+
+            //create an explosion at the place the collission occured
+            numberOfExplosions++;
+
+            explosions[numberOfExplosions] = new objects.Explosion(this.x, this.y);
+            stage.addChild(explosions[numberOfExplosions]);
+
+            console.log(explosions);
+            //remove alien from the array
+            aliens.splice(aliens.indexOf(this), 1);
+
+            //decrease the number of aliens, to account for the alien being removed
+            numberOfAliens--;
+
+            //remove the alien from the stage
+            stage.removeChild(this);
+        } //method collide ends
+    } //class Alien ends
 } //module objects ends   
