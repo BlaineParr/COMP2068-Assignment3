@@ -4,7 +4,7 @@
         //instance variables
         private _movingUp: boolean;
         private _movingDown: boolean;
-        private health: number;
+        public health: number;
 
         //Constructor/////////////////////////////////////////////////////////////////////////////
         constructor() {

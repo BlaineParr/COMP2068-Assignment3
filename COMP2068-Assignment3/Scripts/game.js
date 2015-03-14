@@ -11,19 +11,18 @@
 var canvas;
 var stage;
 var assetLoader;
-//Game objects
+//Game Objects
 var tank;
 var island;
 var aliens = [];
 var ocean;
-// asset manifest - array of asset objects
+//asset manifest - array of asset objects
 var manifest = [
     { id: "alien", src: "assets/images/Alien.png" },
     { id: "island", src: "assets/images/island.png" },
     { id: "ocean", src: "assets/images/ocean.gif" },
     { id: "tank", src: "assets/images/Tank.png" }
 ];
-// Game Objects 
 function preload() {
     assetLoader = new createjs.LoadQueue(); // instantiated assetLoader
     assetLoader.installPlugin(createjs.Sound);
@@ -40,12 +39,18 @@ function init() {
 } //function init ends
 function gameLoop() {
     stage.update(); // Refreshes our stage
-    tank.update(); //updates tank's position
+    if (tank != null) {
+        tank.update(); //updates tank's position
+    }
     island.update(); //updates island's position
     ocean.update(); //updates ocean's position
     for (var alien = 3; alien > 0; alien--) {
         aliens[alien].update(); //updates aliens' position
+        checkCollision(tank, aliens[alien]);
     }
+    if (tank.health <= 0) {
+        tank.visible = false;
+    } //if ends
 } //function gameLoop ends
 // Our Game Kicks off in here
 function main() {
@@ -67,7 +72,32 @@ function main() {
         tank.startMoving(event.keyCode); //start moving the tank
     });
     document.addEventListener("keyup", function (event) {
-        tank.stopMoving(event.keyCode); //stop moving the tank
+        tank.stopMoving(event.keyCode); //start moving the tank
     });
 } //function main ends
+//calculate the distance between two points
+function distance(p1, p2) {
+    return Math.floor(Math.sqrt(Math.pow((p2.x - p1.x), 2) + Math.pow((p2.y - p1.y), 2)));
+} //function distance ends
+function checkCollision(collider1, collider2) {
+    var p1 = new createjs.Point();
+    var p2 = new createjs.Point();
+    p1.x = collider1.x;
+    p1.y = collider1.y;
+    p2.x = collider2.x;
+    p2.y = collider2.y;
+    if (distance(p2, p1) < ((collider1.width * 0.5) + (collider2.width * 0.5))) {
+        if (!collider1.isColliding && !collider2.isColliding) {
+            //createjs.Sound.play(collider.soundString);
+            collider1.isColliding = true;
+            collider2.isColliding = true;
+            collider1.collide();
+            collider2.collide();
+        } //if ends
+    }
+    else {
+        collider1.isColliding = false;
+        collider2.isColliding = false;
+    } //else ends
+} //function plandAndCloud ends
 //# sourceMappingURL=game.js.map

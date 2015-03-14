@@ -3,8 +3,7 @@
         //instance variables
         public width: number;
         public height: number;
-
-        private isColliding: boolean;
+        public isColliding: boolean;
 
         //Getters and Setters//////////////////////////////////////////////////////////////////////
         public setCollission(isColliding): void {
