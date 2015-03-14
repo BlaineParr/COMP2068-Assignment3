@@ -54,6 +54,11 @@ function gameLoop() {
         tank.bullet.update();
     } //if ends
     for (var alien = numberOfAliens; alien > 0; alien--) {
+        if (aliens[alien].hitside) {
+            aliensMove();
+        } //if ends
+    }
+    for (var alien = numberOfAliens; alien > 0; alien--) {
         aliens[alien].update(); //updates aliens' position
         checkCollision(tank, aliens[alien]);
         if (tank.bulletOnScreen) {
@@ -67,7 +72,7 @@ function gameLoop() {
 // Our Game Kicks off in here
 function main() {
     //set the number of aliens to put in the game
-    numberOfAliens = 3;
+    numberOfAliens = 7;
     //initialize the number of explosions to 0
     numberOfExplosions = 0;
     //add ocean to game
@@ -80,7 +85,7 @@ function main() {
     tank = new objects.Tank();
     stage.addChild(tank);
     for (var alien = numberOfAliens; alien > 0; alien--) {
-        aliens[alien] = new objects.Alien();
+        aliens[alien] = new objects.Alien(608, 0 + (32 * alien));
         stage.addChild(aliens[alien]);
     }
     //set up the game for keyboard input
@@ -106,7 +111,6 @@ function checkCollision(collider1, collider2) {
     p2.y = collider2.y;
     if (distance(p2, p1) < ((collider1.width * 0.5) + (collider2.width * 0.5))) {
         if (!collider1.isColliding && !collider2.isColliding) {
-            //createjs.Sound.play(collider.soundString);
             collider1.isColliding = true;
             collider2.isColliding = true;
             collider1.collide();
@@ -118,4 +122,9 @@ function checkCollision(collider1, collider2) {
         collider2.isColliding = false;
     } //else ends
 } //function plandAndCloud ends
+function aliensMove() {
+    for (var alien = numberOfAliens; alien > 0; alien--) {
+        aliens[alien].moveForward();
+    }
+} //function aliensMove ends
 //# sourceMappingURL=game.js.map

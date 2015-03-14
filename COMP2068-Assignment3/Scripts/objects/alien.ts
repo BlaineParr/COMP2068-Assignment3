@@ -3,47 +3,75 @@
         //instance variables
         private _dx: number;
         private _dy: number;
+        private _goalX: number;
+        public speed: number;
+        public hitside: boolean;
+        public movingForward: boolean;
 
         //Constructor/////////////////////////////////////////////////////////////////////////////
-        constructor() {
+        constructor(x: number, y: number) {
             super("alien");
 
-            this._reset();
+            this.x = x;
+            this.y = y;
+
+            this.speed = 1;
+
+            this.hitside = false;
+            this.movingForward = false;
         } //constructor ends
 
         //Private Methods/////////////////////////////////////////////////////////////////////////
-        private _reset(): void {
-            //set y to a random number
-            this.x = 640 + this.width;
-            this.y = Math.floor(Math.random() * 480);
-
-            this._dx = Math.floor(Math.random() * 5) + 5;
-            this._dy = Math.floor(Math.random() * -4) + 2;
-        } //method reset ends
-
         private _checkBounds(): void {
-            if (this.x < 0 - this.height) {
-                this._reset();
+            if (this.y < 0 || this.y > 480) {
+                this.hitside = true;
             } //if ends
         } //method checkBounds ends
 
         //Public Methods//////////////////////////////////////////////////////////////////////////
         public update(): void {
-            this.x -= this._dx;
-            this.y += this._dy;
+            if (this.movingForward) {
+                if (this.speed > 0) {
+                    this.x -= this.speed;
+                } //if ends
+                else {
+                    this.x += this.speed;
+                } //else ends
 
-            this._checkBounds();
+                if (this.x <= this._goalX) {
+                    this.movingForward = false;
+                    this.changeDirection();
+                } //if ends
+            } //if ends
+            else {
+                this.y += this.speed;
+
+                this._checkBounds();
+            } //else ends
         } //method update ends
 
-        public collide(): void {
+        public moveForward() {
+            this.hitside = false;
+            this.movingForward = true;
+            this._goalX = this.x - 32;
+        } //method moveForward ends
 
+        public changeDirection(): void {
+            this.speed *= -1;
+            
+        } //method reset ends
+
+        public collide(): void {
             //create an explosion at the place the collission occured
             numberOfExplosions++;
 
             explosions[numberOfExplosions] = new objects.Explosion(this.x, this.y);
             stage.addChild(explosions[numberOfExplosions]);
 
-            console.log(explosions);
+            for (var alien = numberOfAliens; alien > 0; alien--) {
+                aliens[alien].speed *= 1.2;
+            } //for ends
+
             //remove alien from the array
             aliens.splice(aliens.indexOf(this), 1);
 
