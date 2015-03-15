@@ -53,12 +53,12 @@ function gameLoop() {
     if (tank.bulletOnScreen) {
         tank.bullet.update();
     } //if ends
-    for (var alien = numberOfAliens; alien > 0; alien--) {
+    for (var alien = numberOfAliens - 1; alien >= 0; alien--) {
         if (aliens[alien].hitside) {
             aliensMove();
         } //if ends
     }
-    for (var alien = numberOfAliens; alien > 0; alien--) {
+    for (var alien = numberOfAliens - 1; alien >= 0; alien--) {
         aliens[alien].update(); //updates aliens' position
         checkCollision(tank, aliens[alien]);
         if (tank.bulletOnScreen) {
@@ -72,7 +72,7 @@ function gameLoop() {
 // Our Game Kicks off in here
 function main() {
     //set the number of aliens to put in the game
-    numberOfAliens = 7;
+    numberOfAliens = 45;
     //initialize the number of explosions to 0
     numberOfExplosions = 0;
     //add ocean to game
@@ -84,8 +84,9 @@ function main() {
     //add tank to game
     tank = new objects.Tank();
     stage.addChild(tank);
-    for (var alien = numberOfAliens; alien > 0; alien--) {
-        aliens[alien] = new objects.Alien(608, 0 + (32 * alien));
+    for (var alien = numberOfAliens - 1; alien >= 0; alien--) {
+        aliens[alien] = new objects.Alien(1184 + (32 * (Math.floor(alien / 9))), (32 * (alien % 9)));
+        console.log(32 * (Math.floor(alien / 9)));
         stage.addChild(aliens[alien]);
     }
     //set up the game for keyboard input
@@ -123,7 +124,7 @@ function checkCollision(collider1, collider2) {
     } //else ends
 } //function plandAndCloud ends
 function aliensMove() {
-    for (var alien = numberOfAliens; alien > 0; alien--) {
+    for (var alien = numberOfAliens - 1; alien >= 0; alien--) {
         aliens[alien].moveForward();
     }
 } //function aliensMove ends

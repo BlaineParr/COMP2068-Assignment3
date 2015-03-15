@@ -10,8 +10,8 @@
 
         //Public Methods//////////////////////////////////////////////////////////////////////////
         public update(): void {
-            this.x += 5;
-            if (this.x > 640) {
+            this.x += 10;
+            if (this.x > 1280) {
                 tank.bulletOnScreen = false;
                 stage.removeChild(this);
             } //if ends

@@ -21,14 +21,14 @@
         //Public Methods//////////////////////////////////////////////////////////////////////////
         public update(): void {
             if (this._movingUp) {
-                this.y -= 3;
+                this.y -= 5;
 
                 if (this.y < -16) {
                     this.y = 496;
                 } //if ends
             } //if ends
             else if (this._movingDown) {
-                this.y += 3;
+                this.y += 5;
 
                 if (this.y > 496) {
                     this.y = -16;

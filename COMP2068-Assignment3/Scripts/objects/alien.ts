@@ -68,15 +68,20 @@
             explosions[numberOfExplosions] = new objects.Explosion(this.x, this.y);
             stage.addChild(explosions[numberOfExplosions]);
 
-            for (var alien = numberOfAliens; alien > 0; alien--) {
-                aliens[alien].speed *= 1.2;
-            } //for ends
-
             //remove alien from the array
             aliens.splice(aliens.indexOf(this), 1);
 
             //decrease the number of aliens, to account for the alien being removed
             numberOfAliens--;
+
+            for (var alien = numberOfAliens - 1; alien >= 0; alien--) {
+                if (numberOfAliens > 1) {
+                    aliens[alien].speed *= 1.02;
+                } //if ends
+                else {
+                    aliens[alien].speed *= 4;
+                } //else ends
+            } //for ends
 
             //remove the alien from the stage
             stage.removeChild(this);
