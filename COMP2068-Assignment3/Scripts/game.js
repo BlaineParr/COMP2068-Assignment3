@@ -9,6 +9,7 @@
 /// <reference path="objects/ocean.ts" />
 /// <reference path="objects/tank.ts" />
 /// <reference path="objects/bullet.ts" />
+/// <reference path="objects/bolt.ts" />
 /// <reference path="objects/explosion.ts" />
 var canvas;
 var stage;
@@ -21,6 +22,8 @@ var ocean;
 var numberOfAliens;
 var explosions = [];
 var numberOfExplosions;
+var bolts = [];
+var numberOfBolts;
 //asset manifest - array of asset objects
 var manifest = [
     { id: "alien", src: "assets/images/Alien.png" },
@@ -29,6 +32,7 @@ var manifest = [
     { id: "tank", src: "assets/images/Tank.png" },
     { id: "bullet", src: "assets/images/Bullet.png" },
     { id: "explosion", src: "assets/images/Explosion.png" },
+    { id: "bolt", src: "assets/images/Bolt.png" },
     { id: "song", src: "assets/audio/Conquest.ogg" }
 ];
 function preload() {
@@ -64,8 +68,12 @@ function gameLoop() {
         if (tank.bulletOnScreen) {
             checkCollision(tank.bullet, aliens[alien]);
         } //if ends
+        aliens[alien].checkTarget();
     }
-    for (var explosion = numberOfExplosions; explosion > 0; explosion--) {
+    for (var bolt = numberOfBolts - 1; bolt >= 0; bolt--) {
+        bolts[bolt].update();
+    }
+    for (var explosion = numberOfExplosions - 1; explosion >= 0; explosion--) {
         explosions[explosion].checkTime();
     }
 } //function gameLoop ends
@@ -75,6 +83,8 @@ function main() {
     numberOfAliens = 45;
     //initialize the number of explosions to 0
     numberOfExplosions = 0;
+    //initialize the bolts of explosions to 0
+    numberOfBolts = 0;
     //add ocean to game
     ocean = new objects.Ocean();
     stage.addChild(ocean);

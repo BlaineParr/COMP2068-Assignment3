@@ -4,10 +4,12 @@
         private _dx: number;
         private _dy: number;
         private _goalX: number;
+        private _movingForward: boolean;
+        private _coolDownStart: number;
+        private _coolDownEnd: number;
         public speed: number;
         public hitside: boolean;
-        public movingForward: boolean;
-
+        
         //Constructor/////////////////////////////////////////////////////////////////////////////
         constructor(x: number, y: number) {
             super("alien");
@@ -17,8 +19,11 @@
 
             this.speed = 1;
 
+            this._coolDownStart = 0;
+            this._coolDownEnd = 0;
+
             this.hitside = false;
-            this.movingForward = false;
+            this._movingForward = false;
         } //constructor ends
 
         //Private Methods/////////////////////////////////////////////////////////////////////////
@@ -28,9 +33,22 @@
             } //if ends
         } //method checkBounds ends
 
+        private _fire() {
+            if (Math.floor(Math.random() * 100 + 1) == 1) {
+                if (Date.now() > this._coolDownEnd) {
+                    this._coolDownStart = Date.now();
+                    this._coolDownEnd = this._coolDownStart + 5000;
+
+                    bolts[numberOfBolts] = new objects.Bolt(this.x, this.y);
+                    stage.addChild(bolts[numberOfBolts]);
+                    numberOfBolts++;
+                } //if ends
+            } //if ends
+        } //method fire ends
+
         //Public Methods//////////////////////////////////////////////////////////////////////////
         public update(): void {
-            if (this.movingForward) {
+            if (this._movingForward) {
                 if (this.speed > 0) {
                     this.x -= this.speed;
                 } //if ends
@@ -39,7 +57,7 @@
                 } //else ends
 
                 if (this.x <= this._goalX) {
-                    this.movingForward = false;
+                    this._movingForward = false;
                     this.changeDirection();
                 } //if ends
             } //if ends
@@ -52,21 +70,25 @@
 
         public moveForward() {
             this.hitside = false;
-            this.movingForward = true;
+            this._movingForward = true;
             this._goalX = this.x - 32;
         } //method moveForward ends
 
         public changeDirection(): void {
             this.speed *= -1;
-            
         } //method reset ends
+
+        public checkTarget() {
+            if (tank.y - this.y <= 16 && tank.y - this.y >= -16) {
+                this._fire();
+            } //if ends
+        } //method checkTarget ends
 
         public collide(): void {
             //create an explosion at the place the collission occured
-            numberOfExplosions++;
-
             explosions[numberOfExplosions] = new objects.Explosion(this.x, this.y);
             stage.addChild(explosions[numberOfExplosions]);
+            numberOfExplosions++;
 
             //remove alien from the array
             aliens.splice(aliens.indexOf(this), 1);

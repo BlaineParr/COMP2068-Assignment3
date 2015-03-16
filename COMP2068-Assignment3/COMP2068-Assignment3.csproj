@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\images\Alien.png" />
+    <Content Include="assets\images\Bolt.png" />
     <Content Include="assets\images\Bullet.png" />
     <Content Include="assets\images\Explosion.png" />
     <Content Include="assets\images\island.png" />
@@ -89,6 +90,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\game.ts" />
     <TypeScriptCompile Include="Scripts\objects\alien.ts" />
+    <TypeScriptCompile Include="Scripts\objects\bolt.ts" />
     <TypeScriptCompile Include="Scripts\objects\bullet.ts" />
     <TypeScriptCompile Include="Scripts\objects\explosion.ts" />
     <TypeScriptCompile Include="Scripts\objects\gameObject.ts" />
