@@ -27,7 +27,7 @@ module objects {
 
         //Empty Methods///////////////////////////////////////////////////////////////////////////
         /*
-         * This method acts as a placeholder for a collission event, it will be overridden and
+         * This method acts as a placeholder for a collision event, it will be overridden and
          * defined in each gameObject.
          */
         public collide(): void {

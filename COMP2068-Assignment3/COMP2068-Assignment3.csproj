@@ -69,11 +69,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\images\Alien.png" />
+    <Content Include="assets\images\Background.png" />
     <Content Include="assets\images\Bolt.png" />
     <Content Include="assets\images\Bullet.png" />
     <Content Include="assets\images\Explosion.png" />
     <Content Include="assets\images\island.png" />
-    <Content Include="assets\images\ocean.gif" />
     <Content Include="assets\images\Tank.png" />
     <Content Include="css\game.css" />
     <Content Include="index.html" />

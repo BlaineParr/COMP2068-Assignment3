@@ -24,14 +24,14 @@
  * -Added and implemented gameObject class.
  *
  * v0.4:
- * -Added methods for collission detection and handling.
+ * -Added methods for collision detection and handling.
  *
  * v0.5:
  * -Added firing mechanic to the tank class.
  * -Added a song to the game.
  *
  * v0.6:
- * -Added explosion object to the game, for use on collissions.
+ * -Added explosion object to the game, for use on collisions.
  *
  * v0.7:
  * -AI for alien's movement complete.
@@ -45,6 +45,11 @@
  *
  * v0.10:
  * -Added some internal documentation.
+ *
+ * v0.11
+ * -Fixed errors caused by objects being destroyed before attempting to call one of their methods.
+ * -Replaced ocean background with a desert background (animation and renaming of class still
+ * required).
  */
 /// <reference path="typings/createjs-lib/createjs-lib.d.ts" />
 /// <reference path="typings/easeljs/easeljs.d.ts" />
@@ -77,7 +82,7 @@ var numberOfBolts;
 var manifest = [
     { id: "alien", src: "assets/images/Alien.png" },
     { id: "island", src: "assets/images/island.png" },
-    { id: "ocean", src: "assets/images/ocean.gif" },
+    { id: "background", src: "assets/images/background.png" },
     { id: "tank", src: "assets/images/Tank.png" },
     { id: "bullet", src: "assets/images/Bullet.png" },
     { id: "explosion", src: "assets/images/Explosion.png" },
@@ -111,8 +116,8 @@ function init() {
 function gameLoop() {
     stage.update(); // Refreshes our stage
     tank.update(); //updates tank's position
-    island.update(); //updates island's position
-    ocean.update(); //updates ocean's position
+    //island.update(); //updates island's position
+    //ocean.update(); //updates ocean's position
     //if the tank's bullet is onscreen...
     if (tank.bulletOnScreen) {
         tank.bullet.update(); //refresh its position
@@ -124,16 +129,19 @@ function gameLoop() {
     }
     for (var alien = numberOfAliens - 1; alien >= 0; alien--) {
         aliens[alien].update(); //updates aliens' position
+        aliens[alien].checkTarget(); //check if the tank is in firing range
         checkCollision(tank, aliens[alien]); //check if the tank and alien have collided
         //if the bullet is onscreen...
         if (tank.bulletOnScreen) {
             checkCollision(tank.bullet, aliens[alien]); //check if the alien collided with it
         } //if ends
-        aliens[alien].checkTarget(); //check if the tank is in firing range
     }
     for (var bolt = numberOfBolts - 1; bolt >= 0; bolt--) {
         bolts[bolt].update(); //update the bolt's position
-        checkCollision(tank, bolts[bolt]); //check if it collided with the tank
+        //only check for collision if the bolt wasn't removed from the game in its update
+        if (bolts[bolt] != null) {
+            checkCollision(tank, bolts[bolt]); //check if it collided with the tank
+        } //if ends
     }
     for (var explosion = numberOfExplosions - 1; explosion >= 0; explosion--) {
         explosions[explosion].checkTime(); //check if it should stay on screen
@@ -182,7 +190,7 @@ function distance(p1, p2) {
     return Math.floor(Math.sqrt(Math.pow((p2.x - p1.x), 2) + Math.pow((p2.y - p1.y), 2)));
 } //function distance ends
 /*
- * This function checks for collissions between two game objects.
+ * This function checks for collisions between two game objects.
  */
 function checkCollision(collider1, collider2) {
     //create points for each of the objects positions
@@ -195,7 +203,7 @@ function checkCollision(collider1, collider2) {
     p2.x = collider2.x;
     p2.y = collider2.y;
     //if the distance of the 2 points is less than half the width of the two objects added,
-    //a collission has occured
+    //a collision has occured
     if (distance(p2, p1) < ((collider1.width * 0.5) + (collider2.width * 0.5))) {
         //if neither object was already colliding...
         if (!collider1.isColliding && !collider2.isColliding) {

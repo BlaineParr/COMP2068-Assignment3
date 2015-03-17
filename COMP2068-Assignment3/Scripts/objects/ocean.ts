@@ -7,7 +7,7 @@
 
         //Constructor/////////////////////////////////////////////////////////////////////////////
         constructor() {
-            super(assetLoader.getResult("ocean"));
+            super(assetLoader.getResult("background"));
 
             this.width = this.getBounds().width;
             this.height = this.getBounds().height;
@@ -18,7 +18,7 @@
         //Private Methods/////////////////////////////////////////////////////////////////////////
         private _reset() {
             this.x = 0;
-            this.y = -960;
+            this.y = 0;
         } //method reset ends
 
         private _checkBounds() {

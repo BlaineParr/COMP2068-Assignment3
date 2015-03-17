@@ -135,7 +135,7 @@ module objects {
          * or a bullet.
          */
         public collide(): void {
-            //create an explosion at the place the collission occured
+            //create an explosion at the place the collision occured
             explosions[numberOfExplosions] = new objects.Explosion(this.x, this.y);
             stage.addChild(explosions[numberOfExplosions]);
             numberOfExplosions++; //increase the number of explosions
