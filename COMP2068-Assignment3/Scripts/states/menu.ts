@@ -37,7 +37,8 @@
     } //function menu ends
 
     export function startButtonClick() {
-        changeState(constants.PLAY_STATE);
+        currentState = constants.PLAY_STATE;
+        changeState(currentState);
     } //function playButtonClick ends
 
     export function startButtonMouseOver() {
@@ -49,7 +50,8 @@
     } //function playButtonMouseOver ends
 
     export function instructionsButtonClick() {
-        changeState(constants.INSTRUCTIONS_STATE);
+        currentState = constants.INSTRUCTIONS_STATE;
+        changeState(currentState);
     } //function playButtonClick ends
 
     export function instructionsButtonMouseOver() {
@@ -59,5 +61,4 @@
     export function instructionsButtonMouseOut() {
         instructionsButton.alpha = 1;
     } //function playButtonMouseOver ends
-
 } //module states ends

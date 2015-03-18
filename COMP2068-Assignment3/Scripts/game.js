@@ -60,6 +60,11 @@
  *
  * v0.14:
  * -Added an instructions screen to the game.
+ *
+ * v0.15:
+ * -Added a game over screen.
+ * -implemented scoring system.
+ * -Added care package object to the game (for bonus points).
  */
 /// <reference path="typings/createjs-lib/createjs-lib.d.ts" />
 /// <reference path="typings/easeljs/easeljs.d.ts" />
@@ -68,7 +73,7 @@
 /// <reference path="typings/preloadjs/preloadjs.d.ts" />
 /// <reference path="objects/gameobject.ts" />
 /// <reference path="objects/alien.ts" />
-/// <reference path="objects/island.ts" />
+/// <reference path="objects/carePackage.ts" />
 /// <reference path="objects/background.ts" />
 /// <reference path="objects/tank.ts" />
 /// <reference path="objects/bullet.ts" />
@@ -77,6 +82,7 @@
 /// <reference path="constants.ts" />
 /// <reference path="states/play.ts" />
 /// <reference path="states/menu.ts" />
+/// <reference path="states/gameover.ts" />
 /// <reference path="states/instructions.ts" />
 //Canvas and Asset Objects
 var canvas;
@@ -84,7 +90,7 @@ var stage;
 var assetLoader;
 //Game Objects and Variables
 var tank;
-var island;
+var carePackage;
 var aliens = [];
 var background;
 var numberOfAliens;
@@ -96,13 +102,15 @@ var startButton;
 var instructionsButton;
 var menuScreen;
 var instructionsScreen;
+var score;
+var scoreText;
 //state objects
 var currentState;
 var currentStateFunction;
 //asset manifest - array of asset objects
 var manifest = [
     { id: "alien", src: "assets/images/Alien.png" },
-    { id: "island", src: "assets/images/island.png" },
+    { id: "carePackage", src: "assets/images/CarePackage.png" },
     { id: "background", src: "assets/images/Background.png" },
     { id: "tank", src: "assets/images/Tank.png" },
     { id: "bullet", src: "assets/images/Bullet.png" },
@@ -152,6 +160,8 @@ function changeState(state) {
             states.play();
             break;
         case constants.GAME_OVER_STATE:
+            currentStateFunction = states.gameOverState;
+            states.gameOver();
             break;
         case constants.INSTRUCTIONS_STATE:
             currentStateFunction = states.instructionsState;

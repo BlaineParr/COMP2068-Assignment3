@@ -5,8 +5,10 @@ module states {
      */
     export function playState(): void {
         tank.update(); //updates tank's position
-        //island.update(); //updates island's position
+        carePackage.update(); //updates carePackage's position
         //ocean.update(); //updates ocean's position
+
+        checkCollision(tank, false, carePackage, true);
 
         //if the tank's bullet is onscreen...
         if (tank.bulletOnScreen) {
@@ -27,11 +29,14 @@ module states {
 
             aliens[alien].checkTarget(); //check if the tank is in firing range
 
-            checkCollision(tank, aliens[alien]); //check if the tank and alien have collided
+            //check if the tank and alien have collided
+            //tank takes damage, the alien does not
+            checkCollision(tank, true, aliens[alien], false);
 
             //if the bullet is onscreen...
             if (tank.bulletOnScreen) {
-                checkCollision(tank.bullet, aliens[alien]); //check if the alien collided with it
+                //check if the alien collided with it
+                checkCollision(tank.bullet, true,  aliens[alien], true);
             } //if ends
         } //for ends
 
@@ -41,7 +46,8 @@ module states {
 
             //only check for collision if the bolt wasn't removed from the game in its update
             if (bolts[bolt] != null) {
-                checkCollision(tank, bolts[bolt]); //check if it collided with the tank
+                //check if it collided with the tank
+                checkCollision(tank, true, bolts[bolt], true); 
             } //if ends
         } //for ends
 
@@ -49,6 +55,12 @@ module states {
         for (var explosion = numberOfExplosions - 1; explosion >= 0; explosion--) {
             explosions[explosion].checkTime(); //check if it should stay on screen
         } //for ends
+
+        if (numberOfAliens == 0) {
+            score += 5000;
+            currentState = constants.GAME_OVER_STATE;
+            changeState(currentState);
+        } //if ends
     } //function playState ends
 
     /*
@@ -66,13 +78,16 @@ module states {
         //initialize the bolts of explosions to 0
         numberOfBolts = 0;
 
+        //initialize score to 0
+        score = 0;
+
         //add background to game
         background = new objects.Background();
         stage.addChild(background);
     
         //add island to game
-        island = new objects.Island();
-        stage.addChild(island);
+        carePackage = new objects.CarePackage();
+        stage.addChild(carePackage);
 
         //add tank to game
         tank = new objects.Tank();
@@ -111,7 +126,7 @@ module states {
     /*
      * This function checks for collisions between two game objects.
      */
-    function checkCollision(collider1: objects.GameObject, collider2: objects.GameObject) {
+    function checkCollision(collider1: objects.GameObject, takesDamage1: boolean, collider2: objects.GameObject, takesDamage2: boolean) {
         //create points for each of the objects positions
         var p1: createjs.Point = new createjs.Point();
         var p2: createjs.Point = new createjs.Point();
@@ -133,9 +148,15 @@ module states {
                 collider1.isColliding = true;
                 collider2.isColliding = true;
 
-                //call the collide method of each object
-                collider1.collide();
-                collider2.collide();
+                //if the first objects takes damage from the collision...
+                if (takesDamage1) {
+                    collider1.collide(); //call its collide method
+                } //if ends
+
+                //if the second objects takes damage from the collision...
+                if (takesDamage2) {
+                    collider2.collide(); //call its collide method
+                } //if ends
             } //if ends
         } //if ends
 

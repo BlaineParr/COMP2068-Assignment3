@@ -79,6 +79,11 @@ module objects {
          * This method updates the alien's position
          */
         public update(): void {
+            if (this.x < 0) {
+                currentState = constants.GAME_OVER_STATE
+                changeState(currentState);
+            } //if ends
+
             //if the alien is moving forward...
             if (this._movingForward) {
                 //if the alien's speed is greater than 0...
@@ -135,6 +140,9 @@ module objects {
          * or a bullet.
          */
         public collide(): void {
+            //add to the score based on how far away the alien was
+            score += Math.floor(this.x);
+
             //create an explosion at the place the collision occured
             explosions[numberOfExplosions] = new objects.Explosion(this.x, this.y);
             stage.addChild(explosions[numberOfExplosions]);

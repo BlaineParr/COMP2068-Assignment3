@@ -14,5 +14,15 @@
         instructionsScreen = new createjs.Bitmap("assets/images/InstructionsScreen.png");
         instructionsScreen.x = 320;
         stage.addChild(instructionsScreen);
+
+        //add the start button
+        startButton = new createjs.Bitmap("assets/images/StartButton.png");
+        startButton.x = 590;
+        startButton.y = 398;
+        stage.addChild(startButton);
+
+        startButton.addEventListener("click", startButtonClick);
+        startButton.addEventListener("mouseover", startButtonMouseOver);
+        startButton.addEventListener("mouseout", startButtonMouseOut);
     } //function instructions ends
 } //module states ends

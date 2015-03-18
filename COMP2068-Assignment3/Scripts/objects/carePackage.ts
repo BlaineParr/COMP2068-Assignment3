@@ -1,40 +1,34 @@
 ﻿module objects {
-    export class Island extends createjs.Bitmap {
-        //instance variables
-        public width;
-        public height;
-        private _dy = 5;
-
+    export class CarePackage extends objects.GameObject {
         //Constructor/////////////////////////////////////////////////////////////////////////////
         constructor() {
-            super(assetLoader.getResult("island"));
-
-            this.width = this.getBounds().width;
-            this.height = this.getBounds().height;
-
-            this.regX = this.getBounds().width * 0.5;
-            this.regY = this.getBounds().height * 0.5;
+            super("carePackage");
 
             this._reset();
         } //constructor ends
 
         //Private Methods/////////////////////////////////////////////////////////////////////////
         private _reset() {
-            //set x to a random number
-            this.x = Math.floor(Math.random() * 640);
-            this.y = -this.width;
+            this.x = 1280 + this.width;
+            this.y = Math.floor(Math.random() * 480);
         } //method reset ends
 
         private _checkBounds() {
-            if (this.y > 480 + this.height) {
+            if (this.x < 0 - this.width) {
                 this._reset();
             } //if ends
         } //method checkBounds ends
+
         //Public Methods//////////////////////////////////////////////////////////////////////////
-        update() {
-            this.y += this._dy;
+        public update(): void {
+            this.x -= 5;
 
             this._checkBounds();
         } //method update ends
-    } //class Plane ends
+
+        public collide(): void {
+            score += 300;
+            this._reset();
+        } //method collide ends
+    } //class CarePackage ends
 } //module objects ends  

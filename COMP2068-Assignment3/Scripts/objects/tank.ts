@@ -31,7 +31,8 @@ module objects {
          */
         public update(): void {
             if (this._health <= 0) {
-                this.visible = false;
+                currentState = constants.GAME_OVER_STATE;
+                changeState(currentState);
             } //if ends
 
             //if the tank is moving up... 
