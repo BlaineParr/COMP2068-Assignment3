@@ -1,12 +1,15 @@
 ﻿/// <reference path="../objects/gameobject.ts" />
 /// <reference path="../objects/alien.ts" />
 /// <reference path="../objects/island.ts" />
-/// <reference path="../objects/ocean.ts" />
+/// <reference path="../objects/background.ts" />
 /// <reference path="../objects/tank.ts" />
 /// <reference path="../objects/bullet.ts" />
 /// <reference path="../objects/bolt.ts" />
 /// <reference path="../objects/explosion.ts" />
 module states {
+    /*
+     * This function loops and updates the game as it is being played.
+     */
     export function playState(): void {
         tank.update(); //updates tank's position
         //island.update(); //updates island's position
@@ -59,6 +62,8 @@ module states {
      * This function sets up the game, creating and placing the game objects and variables
      */
     export function play(): void {
+        stage.removeAllChildren();
+        stage.removeAllEventListeners();
         //set 45 aliens to appear in the game
         numberOfAliens = 45;
 
@@ -68,9 +73,9 @@ module states {
         //initialize the bolts of explosions to 0
         numberOfBolts = 0;
 
-        //add ocean to game
-        ocean = new objects.Ocean();
-        stage.addChild(ocean);
+        //add background to game
+        background = new objects.Background();
+        stage.addChild(background);
     
         //add island to game
         island = new objects.Island();

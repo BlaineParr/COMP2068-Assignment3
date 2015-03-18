@@ -46,13 +46,17 @@
  * v0.10:
  * -Added some internal documentation.
  *
- * v0.11
+ * v0.11:
  * -Fixed errors caused by objects being destroyed before attempting to call one of their methods.
  * -Replaced ocean background with a desert background (animation and renaming of class still
  * required).
  *
- * v0.12
+ * v0.12:
  * -Implemented game state system.
+ *
+ * v0.13:
+ * -Added menu to the game (with a working start button).
+ * -Renamed eveything that said "ocean" to "background."
  */
 /// <reference path="typings/createjs-lib/createjs-lib.d.ts" />
 /// <reference path="typings/easeljs/easeljs.d.ts" />
@@ -62,13 +66,14 @@
 /// <reference path="objects/gameobject.ts" />
 /// <reference path="objects/alien.ts" />
 /// <reference path="objects/island.ts" />
-/// <reference path="objects/ocean.ts" />
+/// <reference path="objects/background.ts" />
 /// <reference path="objects/tank.ts" />
 /// <reference path="objects/bullet.ts" />
 /// <reference path="objects/bolt.ts" />
 /// <reference path="objects/explosion.ts" />
 /// <reference path="constants.ts" />
 /// <reference path="states/play.ts" />
+/// <reference path="states/menu.ts" />
 //Canvas and Asset Objects
 var canvas;
 var stage;
@@ -77,12 +82,15 @@ var assetLoader;
 var tank;
 var island;
 var aliens = [];
-var ocean;
+var background;
 var numberOfAliens;
 var explosions = [];
 var numberOfExplosions;
 var bolts = [];
 var numberOfBolts;
+var startButton;
+var instructionsButton;
+var menuScreen;
 //state objects
 var currentState;
 var currentStateFunction;
@@ -90,7 +98,7 @@ var currentStateFunction;
 var manifest = [
     { id: "alien", src: "assets/images/Alien.png" },
     { id: "island", src: "assets/images/island.png" },
-    { id: "background", src: "assets/images/background.png" },
+    { id: "background", src: "assets/images/Background.png" },
     { id: "tank", src: "assets/images/Tank.png" },
     { id: "bullet", src: "assets/images/Bullet.png" },
     { id: "explosion", src: "assets/images/Explosion.png" },
@@ -116,7 +124,7 @@ function init() {
     stage.enableMouseOver(20); // Enable mouse events
     createjs.Ticker.setFPS(60); // 60 frames per second
     createjs.Ticker.addEventListener("tick", gameLoop);
-    currentState = constants.PLAY_STATE;
+    currentState = constants.MENU_STATE;
     changeState(currentState);
 } //function init ends
 /*
@@ -129,6 +137,9 @@ function gameLoop() {
 function changeState(state) {
     switch (state) {
         case constants.MENU_STATE:
+            // instantiate menu screen
+            currentStateFunction = states.menuState;
+            states.menu();
             break;
         case constants.PLAY_STATE:
             // instantiate play screen
@@ -138,5 +149,5 @@ function changeState(state) {
         case constants.GAME_OVER_STATE:
             break;
     }
-}
+} //function changeState ends
 //# sourceMappingURL=game.js.map

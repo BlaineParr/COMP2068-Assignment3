@@ -73,7 +73,10 @@
     <Content Include="assets\images\Bolt.png" />
     <Content Include="assets\images\Bullet.png" />
     <Content Include="assets\images\Explosion.png" />
+    <Content Include="assets\images\InstructionsButton.png" />
     <Content Include="assets\images\island.png" />
+    <Content Include="assets\images\MenuScreen.png" />
+    <Content Include="assets\images\StartButton.png" />
     <Content Include="assets\images\Tank.png" />
     <Content Include="css\game.css" />
     <Content Include="index.html" />
@@ -96,8 +99,9 @@
     <TypeScriptCompile Include="Scripts\objects\explosion.ts" />
     <TypeScriptCompile Include="Scripts\objects\gameObject.ts" />
     <TypeScriptCompile Include="Scripts\objects\island.ts" />
-    <TypeScriptCompile Include="Scripts\objects\ocean.ts" />
+    <TypeScriptCompile Include="Scripts\objects\background.ts" />
     <TypeScriptCompile Include="Scripts\objects\tank.ts" />
+    <TypeScriptCompile Include="Scripts\states\menu.ts" />
     <TypeScriptCompile Include="Scripts\states\play.ts" />
     <TypeScriptCompile Include="Scripts\typings\createjs-lib\createjs-lib.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\easeljs\easeljs.d.ts" />

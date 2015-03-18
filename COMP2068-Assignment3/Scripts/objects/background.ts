@@ -1,9 +1,9 @@
 ﻿module objects {
-    export class Ocean extends createjs.Bitmap {
+    export class Background extends createjs.Bitmap {
         //instance variables
         public width;
         public height;
-        private _dy = 5;
+        private _dx = -5;
 
         //Constructor/////////////////////////////////////////////////////////////////////////////
         constructor() {
@@ -22,13 +22,14 @@
         } //method reset ends
 
         private _checkBounds() {
-            if (this.y >= 0) {
+            if (this.x <= -640) {
                 this._reset();
             } //if ends
         } //method checkBounds ends
+
         //Public Methods//////////////////////////////////////////////////////////////////////////
         update() {
-            this.y += this._dy;
+            this.x += this._dx;
 
             this._checkBounds();
         } //method update ends
