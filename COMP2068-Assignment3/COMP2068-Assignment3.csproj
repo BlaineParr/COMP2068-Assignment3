@@ -85,6 +85,7 @@
     <Content Include="Scripts\lib\soundjs-0.6.0.min.js" />
     <Content Include="Scripts\lib\tweenjs-0.6.0.min.js" />
     <None Include="Scripts\_references.js" />
+    <Content Include="assets\images\InstructionsScreen.png" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -101,6 +102,7 @@
     <TypeScriptCompile Include="Scripts\objects\island.ts" />
     <TypeScriptCompile Include="Scripts\objects\background.ts" />
     <TypeScriptCompile Include="Scripts\objects\tank.ts" />
+    <TypeScriptCompile Include="Scripts\states\instructions.ts" />
     <TypeScriptCompile Include="Scripts\states\menu.ts" />
     <TypeScriptCompile Include="Scripts\states\play.ts" />
     <TypeScriptCompile Include="Scripts\typings\createjs-lib\createjs-lib.d.ts" />

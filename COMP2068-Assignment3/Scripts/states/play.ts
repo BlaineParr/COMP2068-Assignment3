@@ -1,11 +1,4 @@
-﻿/// <reference path="../objects/gameobject.ts" />
-/// <reference path="../objects/alien.ts" />
-/// <reference path="../objects/island.ts" />
-/// <reference path="../objects/background.ts" />
-/// <reference path="../objects/tank.ts" />
-/// <reference path="../objects/bullet.ts" />
-/// <reference path="../objects/bolt.ts" />
-/// <reference path="../objects/explosion.ts" />
+﻿
 module states {
     /*
      * This function loops and updates the game as it is being played.

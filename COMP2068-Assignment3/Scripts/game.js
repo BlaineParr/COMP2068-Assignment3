@@ -57,6 +57,9 @@
  * v0.13:
  * -Added menu to the game (with a working start button).
  * -Renamed eveything that said "ocean" to "background."
+ *
+ * v0.14:
+ * -Added an instructions screen to the game.
  */
 /// <reference path="typings/createjs-lib/createjs-lib.d.ts" />
 /// <reference path="typings/easeljs/easeljs.d.ts" />
@@ -74,6 +77,7 @@
 /// <reference path="constants.ts" />
 /// <reference path="states/play.ts" />
 /// <reference path="states/menu.ts" />
+/// <reference path="states/instructions.ts" />
 //Canvas and Asset Objects
 var canvas;
 var stage;
@@ -91,6 +95,7 @@ var numberOfBolts;
 var startButton;
 var instructionsButton;
 var menuScreen;
+var instructionsScreen;
 //state objects
 var currentState;
 var currentStateFunction;
@@ -147,6 +152,10 @@ function changeState(state) {
             states.play();
             break;
         case constants.GAME_OVER_STATE:
+            break;
+        case constants.INSTRUCTIONS_STATE:
+            currentStateFunction = states.instructionsState;
+            states.instructions();
             break;
     }
 } //function changeState ends

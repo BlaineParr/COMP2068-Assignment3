@@ -30,6 +30,10 @@
         startButton.addEventListener("click", startButtonClick);
         startButton.addEventListener("mouseover", startButtonMouseOver);
         startButton.addEventListener("mouseout", startButtonMouseOut);
+
+        instructionsButton.addEventListener("click", instructionsButtonClick);
+        instructionsButton.addEventListener("mouseover", instructionsButtonMouseOver);
+        instructionsButton.addEventListener("mouseout", instructionsButtonMouseOut);
     } //function menu ends
 
     export function startButtonClick() {
@@ -42,6 +46,18 @@
 
     export function startButtonMouseOut() {
         startButton.alpha = 1;
+    } //function playButtonMouseOver ends
+
+    export function instructionsButtonClick() {
+        changeState(constants.INSTRUCTIONS_STATE);
+    } //function playButtonClick ends
+
+    export function instructionsButtonMouseOver() {
+        instructionsButton.alpha = 0.01;
+    } //function playButtonMouseOver ends
+
+    export function instructionsButtonMouseOut() {
+        instructionsButton.alpha = 1;
     } //function playButtonMouseOver ends
 
 } //module states ends
