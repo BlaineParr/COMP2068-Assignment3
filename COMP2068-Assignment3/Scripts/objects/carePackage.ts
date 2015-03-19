@@ -28,6 +28,8 @@
 
         public collide(): void {
             score += 300;
+            scoreText.text = score.toString();
+
             this._reset();
         } //method collide ends
     } //class CarePackage ends

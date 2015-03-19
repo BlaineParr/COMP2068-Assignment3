@@ -65,6 +65,10 @@
  * -Added a game over screen.
  * -implemented scoring system.
  * -Added care package object to the game (for bonus points).
+ *
+ * v0.16:
+ * -Added Score, aliens (remaining) and health display to the main game.
+ * -Added second instruction screen to explain scoring and a couple tips.
  */
 /// <reference path="typings/createjs-lib/createjs-lib.d.ts" />
 /// <reference path="typings/easeljs/easeljs.d.ts" />
@@ -100,10 +104,16 @@ var bolts = [];
 var numberOfBolts;
 var startButton;
 var instructionsButton;
+var nextButton;
 var menuScreen;
 var instructionsScreen;
+var instructionsScreen2;
+var scoreBoard;
 var score;
 var scoreText;
+var healthText;
+var aliensText;
+var missionOutcomeText;
 //state objects
 var currentState;
 var currentStateFunction;

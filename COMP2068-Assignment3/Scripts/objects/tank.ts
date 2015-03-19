@@ -8,7 +8,7 @@ module objects {
         //instance variables
         private _movingUp: boolean;
         private _movingDown: boolean;
-        private _health: number;
+        public health: number;
         public bullet: objects.Bullet;
         public bulletOnScreen: boolean;
 
@@ -19,7 +19,7 @@ module objects {
         constructor() {
             super("tank");
 
-            this._health = 3;
+            this.health = 3;
 
             this.x = 48;
             this.y = 240;
@@ -30,11 +30,6 @@ module objects {
          * This method update's the tank's position.
          */
         public update(): void {
-            if (this._health <= 0) {
-                currentState = constants.GAME_OVER_STATE;
-                changeState(currentState);
-            } //if ends
-
             //if the tank is moving up... 
             if (this._movingUp) {
                 this.y -= 5; //move the tank up 5 pixels
@@ -111,7 +106,8 @@ module objects {
          * This method decreases the tank's health when they collide with a bolt or an alien.
          */
         public collide(): void {
-            this._health--; //decrease health
+            this.health--; //decrease health
+            healthText.text = this.health.toString();
         } //method collide ends
     } //class Tank ends
 } //module objects ends 

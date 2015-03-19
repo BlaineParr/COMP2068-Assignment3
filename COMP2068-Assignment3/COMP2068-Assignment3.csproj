@@ -75,7 +75,10 @@
     <Content Include="assets\images\CarePackage.png" />
     <Content Include="assets\images\Explosion.png" />
     <Content Include="assets\images\InstructionsButton.png" />
+    <Content Include="assets\images\InstructionsScreen2.png" />
     <Content Include="assets\images\MenuScreen.png" />
+    <Content Include="assets\images\NextButton.png" />
+    <Content Include="assets\images\ScoreBoard.png" />
     <Content Include="assets\images\StartButton.png" />
     <Content Include="assets\images\Tank.png" />
     <Content Include="css\game.css" />

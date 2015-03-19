@@ -1,5 +1,4 @@
-﻿
-module states {
+﻿module states {
     /*
      * This function loops and updates the game as it is being played.
      */
@@ -8,6 +7,8 @@ module states {
         carePackage.update(); //updates carePackage's position
         //ocean.update(); //updates ocean's position
 
+        //check if the tank and carePackage collided
+        //tank doesn't take damage, carePackage does
         checkCollision(tank, false, carePackage, true);
 
         //if the tank's bullet is onscreen...
@@ -18,7 +19,7 @@ module states {
         //check if any aliens have hit the top or bottom of the stage
         for (var alien = numberOfAliens - 1; alien >= 0; alien--) {
             if (aliens[alien].hitside) {
-                aliensMove(); //if they have call aliensMove
+                aliensMove(); //if they have, call aliensMove
             } //if ends
         } //for ends
 
@@ -56,8 +57,16 @@ module states {
             explosions[explosion].checkTime(); //check if it should stay on screen
         } //for ends
 
-        if (numberOfAliens == 0) {
-            score += 5000;
+        if (tank.health <= 0) {
+            currentState = constants.GAME_OVER_STATE;
+            changeState(currentState);
+        } //if ends
+
+        //if there are no aliens left...
+        if (numberOfAliens <= 0) {
+            score += 5000; //add 5000 points to the score
+
+            //change to the game over screen
             currentState = constants.GAME_OVER_STATE;
             changeState(currentState);
         } //if ends
@@ -67,8 +76,10 @@ module states {
      * This function sets up the game, creating and placing the game objects and variables
      */
     export function play(): void {
+        //clear the stage
         stage.removeAllChildren();
         stage.removeAllEventListeners();
+
         //set 45 aliens to appear in the game
         numberOfAliens = 45;
 
@@ -94,25 +105,47 @@ module states {
         stage.addChild(tank);
 
         //add aliens to game
-        //numberOfAliens - 1 is necessary to not leave an empty space in the array
+        //numberOfAliens - 1 is necessary to avoid leaving an empty space in the array
         for (var alien = numberOfAliens - 1; alien >= 0; alien--) {
             //aliens will appear in rows of 9
             aliens[alien] = new objects.Alien(1184 + (32 * (Math.floor(alien / 9))),(32 * (alien % 9)));
             stage.addChild(aliens[alien]); //add the alien to the game
         } //for ends
 
+        //add the scoreboard to the game
+        scoreBoard = new createjs.Bitmap("assets/images/ScoreBoard.png");
+        scoreBoard.y = 480;
+        stage.addChild(scoreBoard);
+
+        //add text elements to the game
+        healthText = new createjs.Text(tank.health.toString(), "24px Arial", "White");
+        healthText.x = 76;
+        healthText.y = 512;
+        stage.addChild(healthText);
+
+        aliensText = new createjs.Text(numberOfAliens.toString(), "24px Arial", "White");
+        aliensText.x = 76;
+        aliensText.y = 541;
+        stage.addChild(aliensText);
+
+        scoreText = new createjs.Text(score.toString(), "24px Arial", "White");
+        scoreText.x = 76;
+        scoreText.y = 570;
+        stage.addChild(scoreText);
+
         //set up the game for keyboard input
         //this section checks which key was pressed
         document.addEventListener("keydown", function (event) {
+            event.preventDefault(); //stops the page from scrolling down when space is pressed
             tank.actionStart(event.keyCode); //send the tank the key that was pressed
         });
 
         //this section checks which key was released
         document.addEventListener("keyup", function (event) {
-            tank.actionEnd(event.keyCode); ///send the tank the key that was pressed
+            tank.actionEnd(event.keyCode); //send the tank the key that was pressed
         });
 
-        //play the song
+        //play the song, looped infinitely
         createjs.Sound.play("song", { loop: -1 });
     } //function play ends
 

@@ -142,6 +142,7 @@ module objects {
         public collide(): void {
             //add to the score based on how far away the alien was
             score += Math.floor(this.x);
+            scoreText.text = score.toString();
 
             //create an explosion at the place the collision occured
             explosions[numberOfExplosions] = new objects.Explosion(this.x, this.y);
@@ -153,6 +154,7 @@ module objects {
 
             //decrease the number of aliens, to account for the alien being removed
             numberOfAliens--;
+            aliensText.text = numberOfAliens.toString();
 
             //for each alien in the game increase its speed by 2%; if it's the last alien,
             //increase its speed by 400%!
