@@ -10,6 +10,7 @@ module objects {
         constructor(x: number, y: number) {
             super("bullet");
 
+            //set the bullet to the position provided
             this.x = x;
             this.y = y;
         } //constructor ends

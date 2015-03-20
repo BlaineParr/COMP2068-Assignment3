@@ -4,7 +4,7 @@
 module objects {
     export class Explosion extends createjs.Bitmap {
         //instance variables
-        private timeEnd: number;
+        private _timeEnd: number;
 
         //Constructor/////////////////////////////////////////////////////////////////////////////
         /*
@@ -17,11 +17,12 @@ module objects {
             this.regX = this.getBounds().width * 0.5;
             this.regY = this.getBounds().width * 0.5;
 
+            //set the explosion to the position provided
             this.x = x;
             this.y = y;
 
             //set timeEnd to be 1 second from the explosions creation
-            this.timeEnd = Date.now() + 1000;
+            this._timeEnd = Date.now() + 1000;
         } //constructor ends
 
         //Public Methods//////////////////////////////////////////////////////////////////////////
@@ -30,7 +31,7 @@ module objects {
          */
         public checkTime(): void {
             //if more than 1 second has passed...
-            if (Date.now() > this.timeEnd) {
+            if (Date.now() > this._timeEnd) {
                 //remove the explosion from the explosions array
                 explosions.splice(explosions.indexOf(this), 1); 
                 stage.removeChild(this); //remove the explosion from the game

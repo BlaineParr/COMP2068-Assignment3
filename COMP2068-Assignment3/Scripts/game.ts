@@ -80,6 +80,9 @@
 * -Added sound effects.
 * -Changed tank sprite to make sense with the scolling background.
 * -Finished game.
+* 
+* v1.1:
+* -Finished internal Documentation.
 */
 /// <reference path="typings/createjs-lib/createjs-lib.d.ts" />
 /// <reference path="typings/easeljs/easeljs.d.ts" />
@@ -129,8 +132,8 @@ var scoreText: createjs.Text;
 var healthText: createjs.Text;
 var aliensText: createjs.Text;
 var missionOutcome: string;
-var missionOutcomeText: createjs.Text
-    ;
+var missionOutcomeText: createjs.Text;
+
 //state objects
 var currentState: number;
 var currentStateFunction: any;
@@ -167,7 +170,8 @@ function preload() {
 } //function preload ends
 
 /*
- * This function initializes the game by setting up the canvas, FPS and enabling mouseover
+ * This function initializes the game by setting up the canvas, FPS, enabling mouseover and
+ * setting the state to the menu.
  */
 function init() {
     canvas = document.getElementById("canvas");
@@ -175,34 +179,41 @@ function init() {
     stage.enableMouseOver(20); // Enable mouse events
     createjs.Ticker.setFPS(60); // 60 frames per second
     createjs.Ticker.addEventListener("tick", gameLoop);
+
+    //change to the menu
     currentState = constants.MENU_STATE;
     changeState(currentState);
 } //function init ends
+
 /*
  * This function loops and updates the game as it is being played.
  */
-
 function gameLoop() {
     currentStateFunction();
     stage.update(); // Refreshes our stage
 } //function gameLoop ends
 
+/*
+ * This function switches the game between states.
+ */
 function changeState(state) {
     switch (state) {
         case constants.MENU_STATE:
-            // instantiate menu screen
+            //instantiate menu screen
             currentStateFunction = states.menuState;
             states.menu();
             break;
         case constants.PLAY_STATE:
-            // instantiate play screen
+            //instantiate play screen
             currentStateFunction = states.playState;
             states.play();
             break;
         case constants.GAME_OVER_STATE:
+            //instantiate game over screen
             currentStateFunction = states.gameOverState;
             states.gameOver();
             break;
+            //instantiate instructions screen
         case constants.INSTRUCTIONS_STATE:
             currentStateFunction = states.instructionsState;
             states.instructions();

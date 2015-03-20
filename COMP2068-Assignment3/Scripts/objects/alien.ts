@@ -6,8 +6,6 @@
 module objects {
     export class Alien extends objects.GameObject {
         //instance variables
-        private _dx: number;
-        private _dy: number;
         private _goalX: number;
         private _movingForward: boolean;
         private _coolDownPeriod: number;
@@ -46,8 +44,9 @@ module objects {
          * to let itself and all other aliens know to move forward.
          */
         private _checkBounds(): void {
+            //if the alien hits the top or bottom of the stage...
             if (this.y < 0 || this.y > 480) {
-                this.hitside = true;
+                this.hitside = true; //set hitside to true
             } //if ends
         } //method checkBounds ends
 
@@ -62,7 +61,7 @@ module objects {
                     //set the cooldown period for 5 seconds
                     this._coolDownPeriod = Date.now() + 5000;
 
-                    //play the boltNoise soundEffect
+                    //play the boltNoise sound effect
                     createjs.Sound.play("boltNoise");
 
                     //create a new bolt at the alien's current position
@@ -93,12 +92,13 @@ module objects {
                     this.x += this.speed; //add the speed to x
                 } //else ends
 
-                //if when moving forward, the alien has reached its goal
+                //if when moving forward, the alien has reached its goal...
                 if (this.x <= this._goalX) {
                     this._movingForward = false; //stop moving forward
                     this.changeDirection(); //change direction
                 } //if ends
             } //if ends
+
             //if it is not moving forward...
             else {
                 this.y += this.speed; //add speed to y
@@ -155,10 +155,12 @@ module objects {
 
             //decrease the number of aliens, to account for the alien being removed
             numberOfAliens--;
+
+            //update the aliensText with the new number
             aliensText.text = numberOfAliens.toString();
 
-            //for each alien in the game increase its speed by 2%; if it's the last alien,
-            //increase its speed by 400%!
+            //for each remaining alien in the game increase its speed by 2%; if it's the last 
+            //alien, increase its speed by 400%!
             for (var alien = numberOfAliens - 1; alien >= 0; alien--) {
                 if (numberOfAliens > 1) {
                     aliens[alien].speed *= 1.02;

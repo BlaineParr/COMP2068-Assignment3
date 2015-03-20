@@ -28,8 +28,11 @@
         for (var alien = numberOfAliens - 1; alien >= 0; alien--) {
             aliens[alien].update(); //updates aliens' position
 
+            //if an alien has gone off the left of the stage...
             if (aliens[alien].x < 0) {
-                missionOutcome = "Mission Failed";
+                missionOutcome = "Mission Failed"; //set mission outcome to Mission Failed
+
+                //switch to the game over state
                 currentState = constants.GAME_OVER_STATE
                 changeState(currentState);
             } //if ends
@@ -63,17 +66,21 @@
             explosions[explosion].checkTime(); //check if it should stay on screen
         } //for ends
 
-        if (tank.health <= 0) {
-            missionOutcome = "Mission Failed"
+        //if the tank has run out of health
+        if (tank.health < 1) {
+            missionOutcome = "Mission Failed" //set missionOutcome to Mission Failed
+
+            //change to the game over state
             currentState = constants.GAME_OVER_STATE;
             changeState(currentState);
         } //if ends
 
         //if there are no aliens left...
-        if (numberOfAliens <= 0) {
+        if (numberOfAliens < 1) {
             score += 5000; //add 5000 points to the score
-            missionOutcome = "Mission Complete!";
-            //change to the game over screen
+            missionOutcome = "Mission Complete!"; //set missionOutcome to Mission Complete!
+
+            //change to the game over state
             currentState = constants.GAME_OVER_STATE;
             changeState(currentState);
         } //if ends
@@ -88,7 +95,7 @@
         stage.removeAllEventListeners();
 
         //set 45 aliens to appear in the game
-        numberOfAliens = 45;
+        numberOfAliens = constants.NUMB_ALIENS;
 
         //initialize the number of explosions to 0
         numberOfExplosions = 0;

@@ -19,8 +19,9 @@ module objects {
         constructor() {
             super("tank");
 
-            this.health = 3;
+            this.health = constants.PLAYER_HEALTH;
 
+            //set the tank's initial position
             this.x = 48;
             this.y = 240;
         } //constructor ends

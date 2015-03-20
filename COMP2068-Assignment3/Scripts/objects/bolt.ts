@@ -4,8 +4,6 @@
  */
 module objects {
     export class Bolt extends objects.GameObject {
-        private _creator: objects.Alien;
-
         //Constructor/////////////////////////////////////////////////////////////////////////////
         /*
          * This constructor creates bolts at the position provided.
@@ -13,6 +11,7 @@ module objects {
         constructor(x: number, y: number) {
             super("bolt");
 
+            //set the bolts position to the one provided
             this.x = x;
             this.y = y;
         } //constructor ends
