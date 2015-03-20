@@ -69,12 +69,16 @@
  * v0.16:
  * -Added Score, aliens (remaining) and health display to the main game.
  * -Added second instruction screen to explain scoring and a couple tips.
+ *
+ * v0.17:
+ * -Added and implemented button class.
  */
 /// <reference path="typings/createjs-lib/createjs-lib.d.ts" />
 /// <reference path="typings/easeljs/easeljs.d.ts" />
 /// <reference path="typings/tweenjs/tweenjs.d.ts" />
 /// <reference path="typings/soundjs/soundjs.d.ts" />
 /// <reference path="typings/preloadjs/preloadjs.d.ts" />
+/// <reference path="constants.ts" />
 /// <reference path="objects/gameobject.ts" />
 /// <reference path="objects/alien.ts" />
 /// <reference path="objects/carePackage.ts" />
@@ -83,7 +87,7 @@
 /// <reference path="objects/bullet.ts" />
 /// <reference path="objects/bolt.ts" />
 /// <reference path="objects/explosion.ts" />
-/// <reference path="constants.ts" />
+/// <reference path="objects/button.ts" />
 /// <reference path="states/play.ts" />
 /// <reference path="states/menu.ts" />
 /// <reference path="states/gameover.ts" />
@@ -113,6 +117,7 @@ var score;
 var scoreText;
 var healthText;
 var aliensText;
+var missionOutcome;
 var missionOutcomeText;
 //state objects
 var currentState;
@@ -126,7 +131,10 @@ var manifest = [
     { id: "bullet", src: "assets/images/Bullet.png" },
     { id: "explosion", src: "assets/images/Explosion.png" },
     { id: "bolt", src: "assets/images/Bolt.png" },
-    { id: "song", src: "assets/audio/Conquest.ogg" }
+    { id: "song", src: "assets/audio/Conquest.ogg" },
+    { id: "startButton", src: "assets/images/StartButton.png" },
+    { id: "instructionsButton", src: "assets/images/InstructionsButton.png" },
+    { id: "nextButton", src: "assets/images/NextButton.png" }
 ];
 /*
  * This function preloads all of the assets in the game, making it ready before the game is

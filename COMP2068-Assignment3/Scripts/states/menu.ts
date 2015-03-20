@@ -16,24 +16,16 @@
         stage.addChild(menuScreen);
 
         //add the start button
-        startButton = new createjs.Bitmap("assets/images/StartButton.png");
-        startButton.x = 352;
-        startButton.y = 398;
+        startButton = new objects.Button("startButton", 402, 423);
         stage.addChild(startButton);
 
         //add the instructions button
-        instructionsButton = new createjs.Bitmap("assets/images/InstructionsButton.png");
-        instructionsButton.x = 828;
-        instructionsButton.y = 398;
+        instructionsButton = new objects.Button("instructionsButton", 878, 423);
         stage.addChild(instructionsButton);
 
         startButton.addEventListener("click", startButtonClick);
-        startButton.addEventListener("mouseover", startButtonMouseOver);
-        startButton.addEventListener("mouseout", startButtonMouseOut);
 
         instructionsButton.addEventListener("click", instructionsButtonClick);
-        instructionsButton.addEventListener("mouseover", instructionsButtonMouseOver);
-        instructionsButton.addEventListener("mouseout", instructionsButtonMouseOut);
     } //function menu ends
 
     export function startButtonClick() {

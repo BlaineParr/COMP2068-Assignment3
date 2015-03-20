@@ -16,24 +16,16 @@
         stage.addChild(instructionsScreen);
 
         //add the start button
-        startButton = new createjs.Bitmap("assets/images/StartButton.png");
-        startButton.x = 590;
-        startButton.y = 398;
+        startButton = new objects.Button("startButton", 640, 423);
         stage.addChild(startButton);
 
         //add the next button
-        nextButton = new createjs.Bitmap("assets/images/NextButton.png");
-        nextButton.x = 829;
-        nextButton.y = 398;
+        nextButton = new objects.Button("nextButton", 879, 423);
         stage.addChild(nextButton);
 
         startButton.addEventListener("click", startButtonClick);
-        startButton.addEventListener("mouseover", startButtonMouseOver);
-        startButton.addEventListener("mouseout", startButtonMouseOut);
 
         nextButton.addEventListener("click", nextButtonClick);
-        nextButton.addEventListener("mouseover", nextButtonMouseOver);
-        nextButton.addEventListener("mouseout", nextButtonMouseOut);
     } //function instructions ends
 
     export function nextButtonClick() {
@@ -43,21 +35,9 @@
         stage.addChild(instructionsScreen);
 
         //add the start button
-        startButton = new createjs.Bitmap("assets/images/StartButton.png");
-        startButton.x = 590;
-        startButton.y = 398;
+        startButton = new objects.Button("startButton", 640, 423);
         stage.addChild(startButton);
 
         startButton.addEventListener("click", startButtonClick);
-        startButton.addEventListener("mouseover", startButtonMouseOver);
-        startButton.addEventListener("mouseout", startButtonMouseOut);
     } //function nextButtonClick ends
-
-    export function nextButtonMouseOver() {
-        nextButton.alpha = 0.01;
-    } //function nextButtonMouseOver ends
-
-    export function nextButtonMouseOut() {
-        nextButton.alpha = 1;
-    } //function nextButtonMouseOver ends
 } //module states ends

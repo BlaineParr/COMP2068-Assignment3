@@ -28,6 +28,12 @@
         for (var alien = numberOfAliens - 1; alien >= 0; alien--) {
             aliens[alien].update(); //updates aliens' position
 
+            if (aliens[alien].x < 0) {
+                missionOutcome = "Mission Failed";
+                currentState = constants.GAME_OVER_STATE
+                changeState(currentState);
+            } //if ends
+
             aliens[alien].checkTarget(); //check if the tank is in firing range
 
             //check if the tank and alien have collided
@@ -58,6 +64,7 @@
         } //for ends
 
         if (tank.health <= 0) {
+            missionOutcome = "Mission Failed"
             currentState = constants.GAME_OVER_STATE;
             changeState(currentState);
         } //if ends
@@ -65,7 +72,7 @@
         //if there are no aliens left...
         if (numberOfAliens <= 0) {
             score += 5000; //add 5000 points to the score
-
+            missionOutcome = "Mission Complete!";
             //change to the game over screen
             currentState = constants.GAME_OVER_STATE;
             changeState(currentState);

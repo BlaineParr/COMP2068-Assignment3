@@ -100,6 +100,7 @@
     <TypeScriptCompile Include="Scripts\objects\alien.ts" />
     <TypeScriptCompile Include="Scripts\objects\bolt.ts" />
     <TypeScriptCompile Include="Scripts\objects\bullet.ts" />
+    <TypeScriptCompile Include="Scripts\objects\button.ts" />
     <TypeScriptCompile Include="Scripts\objects\explosion.ts" />
     <TypeScriptCompile Include="Scripts\objects\gameObject.ts" />
     <TypeScriptCompile Include="Scripts\objects\carePackage.ts" />

@@ -79,11 +79,6 @@ module objects {
          * This method updates the alien's position
          */
         public update(): void {
-            if (this.x < 0) {
-                currentState = constants.GAME_OVER_STATE
-                changeState(currentState);
-            } //if ends
-
             //if the alien is moving forward...
             if (this._movingForward) {
                 //if the alien's speed is greater than 0...
