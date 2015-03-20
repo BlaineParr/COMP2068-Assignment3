@@ -33,24 +33,8 @@
         changeState(currentState);
     } //function playButtonClick ends
 
-    export function startButtonMouseOver() {
-        startButton.alpha = 0.01;
-    } //function playButtonMouseOver ends
-
-    export function startButtonMouseOut() {
-        startButton.alpha = 1;
-    } //function playButtonMouseOver ends
-
     export function instructionsButtonClick() {
         currentState = constants.INSTRUCTIONS_STATE;
         changeState(currentState);
     } //function playButtonClick ends
-
-    export function instructionsButtonMouseOver() {
-        instructionsButton.alpha = 0.01;
-    } //function playButtonMouseOver ends
-
-    export function instructionsButtonMouseOut() {
-        instructionsButton.alpha = 1;
-    } //function playButtonMouseOver ends
 } //module states ends

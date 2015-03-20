@@ -19,5 +19,12 @@
         scoreText.x = 640 - (scoreText.getMeasuredWidth() / 2);
         scoreText.y = 100;
         stage.addChild(scoreText);
+
+        againButton = new objects.Button("againButton", 640, 423);
+        stage.addChild(againButton);
+
+        againButton.addEventListener("click", startButtonClick);
     } //function gameOver ends
+
+
 } //module states ends 

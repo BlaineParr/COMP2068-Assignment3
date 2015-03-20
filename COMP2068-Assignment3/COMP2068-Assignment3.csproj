@@ -68,6 +68,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\images\AgainButton.png" />
     <Content Include="assets\images\Alien.png" />
     <Content Include="assets\images\Background.png" />
     <Content Include="assets\images\Bolt.png" />

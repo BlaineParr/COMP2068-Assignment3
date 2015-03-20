@@ -1,4 +1,4 @@
-/*
+﻿/*
 * COMP2068-Assignment3: Space Infiltrators
 *
 * Author: Blaine Parr
@@ -72,7 +72,7 @@
 *
 * v0.17:
 * -Added and implemented button class.
-*
+* 
 * v0.18:
 * -Added again button on the game over screen.
 */
@@ -95,37 +95,41 @@
 /// <reference path="states/menu.ts" />
 /// <reference path="states/gameover.ts" />
 /// <reference path="states/instructions.ts" />
+
 //Canvas and Asset Objects
 var canvas;
-var stage;
+var stage: createjs.Stage;
 var assetLoader;
+
 //Game Objects and Variables
-var tank;
-var carePackage;
-var aliens = [];
-var background;
-var numberOfAliens;
-var explosions = [];
-var numberOfExplosions;
-var bolts = [];
-var numberOfBolts;
-var startButton;
-var instructionsButton;
-var nextButton;
-var againButton;
-var menuScreen;
-var instructionsScreen;
-var instructionsScreen2;
-var scoreBoard;
-var score;
-var scoreText;
-var healthText;
-var aliensText;
-var missionOutcome;
-var missionOutcomeText;
+var tank: objects.Tank;
+var carePackage: objects.CarePackage;
+var aliens: objects.Alien[] = [];
+var background: objects.Background;
+var numberOfAliens: number;
+var explosions: objects.Explosion[] = [];
+var numberOfExplosions: number;
+var bolts: objects.Bolt[] = [];
+var numberOfBolts: number;
+var startButton: objects.Button;
+var instructionsButton: objects.Button;
+var nextButton: objects.Button;
+var againButton: objects.Button;
+var menuScreen: createjs.Bitmap;
+var instructionsScreen: createjs.Bitmap;
+var instructionsScreen2: createjs.Bitmap;
+var scoreBoard: createjs.Bitmap;
+var score: number;
+var scoreText: createjs.Text;
+var healthText: createjs.Text;
+var aliensText: createjs.Text;
+var missionOutcome: string;
+var missionOutcomeText: createjs.Text
+    ;
 //state objects
-var currentState;
-var currentStateFunction;
+var currentState: number;
+var currentStateFunction: any;
+
 //asset manifest - array of asset objects
 var manifest = [
     { id: "alien", src: "assets/images/Alien.png" },
@@ -139,8 +143,9 @@ var manifest = [
     { id: "startButton", src: "assets/images/StartButton.png" },
     { id: "instructionsButton", src: "assets/images/InstructionsButton.png" },
     { id: "nextButton", src: "assets/images/NextButton.png" },
-    { id: "againButton", src: "assets/images/AgainButton.png" }
+    { id: "againButton", src: "assets/images/AgainButton.png"}
 ];
+
 /*
  * This function preloads all of the assets in the game, making it ready before the game is
  * launched.
@@ -151,6 +156,7 @@ function preload() {
     assetLoader.on("complete", init, this); // event handler-triggers when loading done
     assetLoader.loadManifest(manifest); // loading my asset manifest
 } //function preload ends
+
 /*
  * This function initializes the game by setting up the canvas, FPS and enabling mouseover
  */
@@ -166,10 +172,12 @@ function init() {
 /*
  * This function loops and updates the game as it is being played.
  */
+
 function gameLoop() {
     currentStateFunction();
     stage.update(); // Refreshes our stage
 } //function gameLoop ends
+
 function changeState(state) {
     switch (state) {
         case constants.MENU_STATE:
@@ -190,6 +198,5 @@ function changeState(state) {
             currentStateFunction = states.instructionsState;
             states.instructions();
             break;
-    }
+    } //switch ends
 } //function changeState ends
-//# sourceMappingURL=game.js.map
