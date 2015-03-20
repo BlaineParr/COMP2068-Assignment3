@@ -62,6 +62,9 @@ module objects {
                     //set the cooldown period for 5 seconds
                     this._coolDownPeriod = Date.now() + 5000;
 
+                    //play the boltNoise soundEffect
+                    createjs.Sound.play("boltNoise");
+
                     //create a new bolt at the alien's current position
                     bolts[numberOfBolts] = new objects.Bolt(this.x, this.y);
 
@@ -138,6 +141,9 @@ module objects {
             //add to the score based on how far away the alien was
             score += Math.floor(this.x);
             scoreText.text = score.toString();
+
+            //play the explodeNoise sound effect
+            createjs.Sound.play("explodeNoise");
 
             //create an explosion at the place the collision occured
             explosions[numberOfExplosions] = new objects.Explosion(this.x, this.y);

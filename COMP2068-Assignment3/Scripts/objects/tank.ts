@@ -92,6 +92,9 @@ module objects {
         public fire(): void {
             //if there is no bullet on screen...
             if (!this.bulletOnScreen) {
+                //play the bulletNoise sound effect
+                createjs.Sound.play("bulletNoise");
+
                 //create the bullet at the tank's current position
                 this.bullet = new objects.Bullet(this.x, this.y);
 

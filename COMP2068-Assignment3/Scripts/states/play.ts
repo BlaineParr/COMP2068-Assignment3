@@ -5,7 +5,7 @@
     export function playState(): void {
         tank.update(); //updates tank's position
         carePackage.update(); //updates carePackage's position
-        //ocean.update(); //updates ocean's position
+        background.update(); //updates ocean's position
 
         //check if the tank and carePackage collided
         //tank doesn't take damage, carePackage does

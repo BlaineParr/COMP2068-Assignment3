@@ -30,6 +30,9 @@
             score += 300;
             scoreText.text = score.toString();
 
+            //play the carePackageNoise sound effect
+            createjs.Sound.play("carePackageNoise");
+
             this._reset();
         } //method collide ends
     } //class CarePackage ends

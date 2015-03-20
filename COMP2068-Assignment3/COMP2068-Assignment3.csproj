@@ -60,6 +60,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\audio\Conquest.ogg" />
+    <Content Include="assets\audio\BoltNoise.ogg" />
+    <Content Include="assets\audio\BulletNoise.ogg" />
+    <Content Include="assets\audio\ExplodeNoise.ogg" />
+    <Content Include="assets\audio\CarePackageNoise.ogg" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

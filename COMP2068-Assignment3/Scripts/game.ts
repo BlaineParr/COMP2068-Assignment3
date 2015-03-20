@@ -75,6 +75,11 @@
 * 
 * v0.18:
 * -Added again button on the game over screen.
+* 
+* v1.0:
+* -Added sound effects.
+* -Changed tank sprite to make sense with the scolling background.
+* -Finished game.
 */
 /// <reference path="typings/createjs-lib/createjs-lib.d.ts" />
 /// <reference path="typings/easeljs/easeljs.d.ts" />
@@ -140,6 +145,10 @@ var manifest = [
     { id: "explosion", src: "assets/images/Explosion.png" },
     { id: "bolt", src: "assets/images/Bolt.png" },
     { id: "song", src: "assets/audio/Conquest.ogg" },
+    { id: "bulletNoise", src: "assets/audio/BulletNoise.ogg" },
+    { id: "boltNoise", src: "assets/audio/BoltNoise.ogg" },
+    { id: "explodeNoise", src: "assets/audio/ExplodeNoise.ogg" },
+    { id: "carePackageNoise", src: "assets/audio/CarePackageNoise.ogg"},
     { id: "startButton", src: "assets/images/StartButton.png" },
     { id: "instructionsButton", src: "assets/images/InstructionsButton.png" },
     { id: "nextButton", src: "assets/images/NextButton.png" },

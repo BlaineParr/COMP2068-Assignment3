@@ -3,7 +3,6 @@
         //instance variables
         public width;
         public height;
-        private _dx = -5;
 
         //Constructor/////////////////////////////////////////////////////////////////////////////
         constructor() {
@@ -29,7 +28,7 @@
 
         //Public Methods//////////////////////////////////////////////////////////////////////////
         update() {
-            this.x += this._dx;
+            this.x -= 5;
 
             this._checkBounds();
         } //method update ends
