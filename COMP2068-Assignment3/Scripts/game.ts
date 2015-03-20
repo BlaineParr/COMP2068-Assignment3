@@ -83,6 +83,9 @@
 * 
 * v1.1:
 * -Finished internal Documentation.
+* 
+* v1.2:
+* -Removed empty fonts folder.
 */
 /// <reference path="typings/createjs-lib/createjs-lib.d.ts" />
 /// <reference path="typings/easeljs/easeljs.d.ts" />
